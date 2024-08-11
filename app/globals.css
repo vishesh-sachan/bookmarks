@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'SF-Mono-Regular';
+    src: url(../utils/fonts/SF-Mono-Regular.otf);
+}
+
+body{
+    background-color: black;
+}
