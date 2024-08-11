@@ -33,7 +33,7 @@ export default function SignUp(){
                     </div>
                     <Link href={'/signin'}>
                     <div className="text-[#0084FF]">
-                        SignUp
+                        SignIn
                     </div>
                     </Link>
 

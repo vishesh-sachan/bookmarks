@@ -29,11 +29,11 @@ export default function SignIn(){
                 </div>
                 <div className="flex text-[#FFFFFF] text-sm">
                     <div className="ml-50 mb-20 mr-10" >
-                        Already have Account?
+                        Don't have Account?
                     </div>
                     <Link href={'/signup'}>
                     <div className="text-[#0084FF]">
-                        SignIn
+                        SignUp
                     </div>
                     </Link>
 
