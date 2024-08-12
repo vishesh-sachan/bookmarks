@@ -3,7 +3,33 @@ import Link from "next/link";
 import { Modal } from "../components/Modal";
 import { useState } from "react";
 
-const folders = ['Dev Help', 'Courses', 'Gigs', 'Dev Help', 'Courses', 'Gigs', 'Dev Help', 'Courses', 'Gigs', 'Dev Help', 'Courses', 'Gigs', 'Dev Help', 'Courses', 'Gigs'];
+const folders = ['DevHelp', 'Courses', 'Gigs'];
+const files = [
+    {
+        '_id':'1',
+        'name':'100xDevs',
+        'url':'https://app.100xdevs.com/',
+        'folder':'Courses'
+    },
+    {
+        '_id':'2',
+        'name':'GitHub',
+        'url':'https://github.com/',
+        'folder':'DevHelp'
+    },
+    {
+        '_id':'3',
+        'name':'UpWork',
+        'url':'https://www.upwork.com/',
+        'folder':'Gigs'
+    },
+    {
+        '_id':'4',
+        'name':'Drive',
+        'url':'https://drive.google.com/drive/u/0/my-drive',
+        'folder':'Root'
+    }
+]
 
 export default function Root() {
 
@@ -36,11 +62,13 @@ export default function Root() {
                 </div>
                 <div className="grid grid-cols-5 gap-4 p-4">
                     {folders.map((folder, index) => (
-                        <div key={index} className="bg-[#1A1A1A] rounded cursor-pointer">
-                            <div className="m-6">
-                                {folder}
+                        <Link href={`/root/${folder}`}>
+                            <div key={index} className="bg-[#1A1A1A] rounded cursor-pointer">
+                                <div className="m-6 p-4">
+                                    {folder}
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>
@@ -50,13 +78,18 @@ export default function Root() {
                     Files +
                 </div>
                 <div className="grid grid-cols-5 gap-4 p-4">
-                    {folders.map((folder, index) => (
-                        <div key={index} className="bg-[#1A1A1A] rounded cursor-pointer">
-                            <div className="m-6">
-                                {folder}
+                    {files.map((file) => {
+                        if(file.folder == 'Root')
+                        return(
+                        <Link href={file.url} target="_blank">
+                            <div key={file._id} className="bg-[#1A1A1A] rounded cursor-pointer">
+                                <div className="m-6 p-4">
+                                    {file.name}
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        </Link>)
+                       
+                    })}
                 </div>
             </div>
             <Modal isOpen={showFolderModal}>
