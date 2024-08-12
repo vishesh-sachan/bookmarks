@@ -61,7 +61,7 @@ export default function Root() {
             </div>
             <Modal isOpen={showFolderModal}>
                 <div className="h-screen flex items-center justify-center ">
-                    <div className="border rounded font-SFmono text-[#FFFFFF] bg-[#000000]">
+                    <div className="border rounded font-SFmono text-[#FFFFFF] bg-[#1E1E1E] bg-opacity-80">
                         <div className="m-50 text-[#000000]">
                             <input type="text" placeholder="name" className="py-3 px-10 rounded"></input>
                         </div>
@@ -75,7 +75,7 @@ export default function Root() {
             </Modal>
             <Modal isOpen={showFileModal} >
             <div className="h-screen flex items-center justify-center ">
-                    <div className="border rounded font-SFmono text-[#FFFFFF] bg-[#000000]">
+                    <div className="border rounded font-SFmono text-[#FFFFFF] bg-[#1E1E1E] bg-opacity-80">
                         <div className="m-50 text-[#000000]">
                             <input type="text" placeholder="name" className="py-3 px-10 rounded"></input>
                         </div>
