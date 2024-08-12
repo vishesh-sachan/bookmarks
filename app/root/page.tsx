@@ -1,8 +1,15 @@
+'use client'
 import Link from "next/link";
+import { Modal } from "../components/Modal";
+import { useState } from "react";
 
 const folders = ['Dev Help', 'Courses', 'Gigs', 'Dev Help', 'Courses', 'Gigs', 'Dev Help', 'Courses', 'Gigs', 'Dev Help', 'Courses', 'Gigs', 'Dev Help', 'Courses', 'Gigs'];
 
 export default function Root() {
+
+    const [showFolderModal , setShowFolderModal] = useState(false)
+    const [showFileModal , setShowFileModal] = useState(false)
+
     return (
         <main>
             <div className="flex justify-between font-SFmono bg-[#000000] text-[#FFFFFF] h-10 text-2xl">
@@ -24,7 +31,7 @@ export default function Root() {
             </div>
 
             <div className="font-SFmono text-[#FFFFFF] mt-30">
-                <div className="cursor-pointer ml-20">
+                <div className="cursor-pointer ml-20" onClick={()=>{setShowFolderModal(true)}}>
                     Folders +
                 </div>
                 <div className="grid grid-cols-5 gap-4 p-4">
@@ -39,7 +46,7 @@ export default function Root() {
             </div>
             
             <div className="font-SFmono text-[#FFFFFF] mt-30">
-                <div className="cursor-pointer ml-20">
+                <div className="cursor-pointer ml-20" onClick={()=>{setShowFileModal(true)}}>
                     Files +
                 </div>
                 <div className="grid grid-cols-5 gap-4 p-4">
@@ -52,6 +59,36 @@ export default function Root() {
                     ))}
                 </div>
             </div>
+            <Modal isOpen={showFolderModal}>
+                <div className="h-screen flex items-center justify-center ">
+                    <div className="border rounded font-SFmono text-[#FFFFFF] bg-[#000000]">
+                        <div className="m-50 text-[#000000]">
+                            <input type="text" placeholder="name" className="py-3 px-10 rounded"></input>
+                        </div>
+                        
+                        <div className="flex justify-between">
+                        <div className="bg-[#FFFFFF] py-3 px-5 m-50 rounded text-[#000000] bg-[#F0C9C9] cursor-pointer" onClick={()=>{setShowFolderModal(false)}}>Cancel</div>
+                        <div className="bg-[#FFFFFF] py-3 px-5 m-50 rounded text-[#000000] bg-[#0084FF] cursor-pointer">Done</div>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+            <Modal isOpen={showFileModal} >
+            <div className="h-screen flex items-center justify-center ">
+                    <div className="border rounded font-SFmono text-[#FFFFFF] bg-[#000000]">
+                        <div className="m-50 text-[#000000]">
+                            <input type="text" placeholder="name" className="py-3 px-10 rounded"></input>
+                        </div>
+                        <div className="mb-10 ml-50 text-[#000000]">
+                            <input type="text" placeholder="url" className="py-3 px-10 rounded"></input>
+                        </div>
+                        <div className="flex justify-between">
+                        <div className="bg-[#FFFFFF] py-3 px-5 m-50 rounded text-[#000000] bg-[#F0C9C9] cursor-pointer" onClick={()=>{setShowFileModal(false)}}>Cancel</div>
+                        <div className="bg-[#FFFFFF] py-3 px-5 m-50 rounded text-[#000000] bg-[#0084FF] cursor-pointer">Done</div>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
         </main>
     );
 }
