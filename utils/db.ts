@@ -2,19 +2,27 @@ import mongoose from "mongoose";
 
 const DBurl = process.env.MONGODB_CONNECTION_STRING || ''
 
-mongoose.connect(DBurl)
+if(!mongoose.connections[0].readyState){
+    try {
+        mongoose.connect(DBurl)
+        
+    } catch (error) {
+        console.log({msg:"error while connecting to DB"} , error)
+    }
+
+}
 
 const UserSchema = new mongoose.Schema({
-    username: String,
-    pasword: String,
-    folders: [String]
+    username: {type:String, unique:true, required:true},
+    password: {type:String, required:true},
+    folders: {type:[String] , default:['Root']}
 })
 
 const bookMarkSchema = new mongoose.Schema({
-    userId: String,
-    name: String,
-    url: String,
-    folder: String
+    userId: {type:String, required:true},
+    name: {type:String, required:true},
+    url: {type:String, required:true},
+    folder: {type:String, required:true}
 })
 
 

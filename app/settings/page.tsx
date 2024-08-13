@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logout from "../components/Logout";
 export default function Settings(){
     
     return (
@@ -18,9 +19,7 @@ export default function Settings(){
                 </div>
     
                 </div>
-                <div className="mb-50 ml-50 mr-50 text-[#000000] cursor-pointer">
-                    <div className="py-3 px-10 rounded bg-[#D9D9D9] ">Log Out</div>
-                </div>
+                <Logout />
                 <div className="mb-50 ml-50 mr-50 text-[#000000] cursor-pointer">
                     <div className="py-3 px-10 rounded bg-[#F0C9C9]">Delete Account</div>
                 </div>
