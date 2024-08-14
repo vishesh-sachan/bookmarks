@@ -26,6 +26,8 @@ const bookMarkSchema = new mongoose.Schema({
 })
 
 
-export const User = mongoose.model('User' , UserSchema)
-export const BookMark = mongoose.model('BookMark' , bookMarkSchema)
+// export const User = mongoose.model('User' , UserSchema)
+// export const BookMark = mongoose.model('BookMark' , bookMarkSchema)
 
+export const User = mongoose.models.User || mongoose.model('User', UserSchema);
+export const BookMark = mongoose.models.BookMark || mongoose.model('BookMark', bookMarkSchema);
