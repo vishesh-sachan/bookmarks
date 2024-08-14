@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function SignUp(){
     return (
-        <div>
+        <div className="text-[#FFFFFF]">
             <Link href={'/api/auth/signin'}><div>sorry, temporarily unavailable</div></Link>
         </div>
     )
-    
+
     // return (
     // <main>
     //     <div className="flex justify-center font-SFmono bg-[#000000] text-[#FFFFFF] h-10 text-2xl">

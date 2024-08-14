@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function SignIn(){
     return (
-        <div>
+        <div className="text-[#FFFFFF]">
             <Link href={'/api/auth/signin'}><div>sorry, temporarily unavailable</div></Link>
         </div>
     )
