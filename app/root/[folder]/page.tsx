@@ -28,7 +28,7 @@ export default function Folder({params}:any){
             }
         }
         getFiles()
-    },[updatedFiles])
+    },[updatedFiles,setFiles])
 
     async function addFile(e:any) {
     
@@ -89,8 +89,8 @@ export default function Folder({params}:any){
                     {files.map((file) => {
                         if(params.folder == file.folder)
                         return(
-                        <Link href={file.url} target="_blank">
-                            <div key={file._id} className="bg-[#1A1A1A] rounded cursor-pointer">
+                        <Link key={file._id} href={file.url} target="_blank">
+                            <div className="bg-[#1A1A1A] rounded cursor-pointer">
                                 <div className="m-6 p-4">
                                     {file.name}
                                 </div>

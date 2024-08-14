@@ -31,7 +31,7 @@ export default function Root() {
             }
         }
         getFolders()
-    },[updatedFolers])
+    },[updatedFolers , setFolders])
 
     useEffect(()=>{
         async function getFiles(){
@@ -45,7 +45,7 @@ export default function Root() {
             }
         }
         getFiles()
-    },[updatedFiles])
+    },[updatedFiles , setFiles])
 
     async function addFile(e:any) {
     
@@ -116,8 +116,8 @@ export default function Root() {
                 </div>
                 <div className="grid grid-cols-5 gap-4 p-4">
                     {folders.map((folder, index) => (
-                        <Link href={`/root/${folder}`}>
-                            <div key={index} className="bg-[#1A1A1A] rounded cursor-pointer">
+                        <Link key={index} href={`/root/${folder}`}>
+                            <div className="bg-[#1A1A1A] rounded cursor-pointer">
                                 <div className="m-6 p-4">
                                     {folder}
                                 </div>
@@ -135,8 +135,8 @@ export default function Root() {
                     {files.map((file) => {
                         if(file.folder == 'Root')
                         return(
-                        <Link href={file.url} target="_blank">
-                            <div key={file._id} className="bg-[#1A1A1A] rounded cursor-pointer">
+                        <Link key={file._id} href={file.url} target="_blank">
+                            <div className="bg-[#1A1A1A] rounded cursor-pointer">
                                 <div className="m-6 p-4">
                                     {file.name}
                                 </div>
