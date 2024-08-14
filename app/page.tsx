@@ -1,6 +1,15 @@
+'use client'
+import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const session = useSession()
+  const router = useRouter()
+
+  if(session.status == "authenticated"){
+    router.push('/root') 
+  }
   return (
     <main>
       <div className="flex justify-center font-SFmono bg-[#000000] text-[#FFFFFF] h-10 text-2xl">

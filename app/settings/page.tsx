@@ -1,7 +1,16 @@
+'use client'
 import Link from "next/link";
 import Logout from "../components/Logout";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+
 export default function Settings(){
+    const session = useSession()
+    const router = useRouter()
     
+    if(session.status !== "authenticated" && session.status !== "loading"){
+        router.push('/api/auth/signin') // change it to your own signin page 
+    }
     return (
     <main>
         <div className="flex justify-center font-SFmono bg-[#000000] text-[#FFFFFF] h-10 text-2xl">

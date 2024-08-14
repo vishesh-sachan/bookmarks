@@ -1,38 +1,59 @@
 'use client'
 import { Modal } from "@/app/components/Modal";
+import { filesAtom, updatedFilesAtom } from "@/store/atoms";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useState } from "react";
-const files = [
-    {
-        '_id':'1',
-        'name':'100xDevs',
-        'url':'https://app.100xdevs.com/',
-        'folder':'Courses'
-    },
-    {
-        '_id':'2',
-        'name':'GitHub',
-        'url':'https://github.com/',
-        'folder':'DevHelp'
-    },
-    {
-        '_id':'3',
-        'name':'UpWork',
-        'url':'https://www.upwork.com/',
-        'folder':'Gigs'
-    },
-    {
-        '_id':'4',
-        'name':'Drive',
-        'url':'https://drive.google.com/drive/u/0/my-drive',
-        'folder':'Root'
-    }
-]
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
 export default function Folder({params}:any){
-    
+
+    const session = useSession()
+    const router = useRouter()
+    const [files , setFiles] = useRecoilState(filesAtom)
     const [showFileModal , setShowFileModal] = useState(false)
+    const [updatedFiles , setUpdatedFiles] = useRecoilState(updatedFilesAtom)
+
+    useEffect(()=>{
+        async function getFiles(){
+            // console.log("files get called")
+            try{
+                const res = await axios.get('/api/bookmarks')
+                // console.log(res.data.bookmarks)
+                setFiles(res.data.bookmarks)
+            }catch(error){
+                console.log('error while getting files',error)
+            }
+        }
+        getFiles()
+    },[updatedFiles])
+
+    async function addFile(e:any) {
     
+        e.preventDefault();
+        const name = e.target[0].value;
+        const url = e.target[1].value;
+        const folder = params.folder
+        // const userId = JSON.stringify(session.data?.user.id) // ignore type error
+    
+        try{
+            await axios.post('/api/bookmarks',{
+                name,url,folder
+            })
+            setShowFileModal(false)
+            const val= Math.random()
+            setUpdatedFiles(val)
+    
+        }catch(error){
+            console.log('error while getting files',error)
+        }
+    }
+    
+    if(session.status !== "authenticated" && session.status !== "loading"){
+        router.push('/api/auth/signin') // change it to your own signin page 
+    }
     return (
         <main>
             <div className="flex justify-between font-SFmono bg-[#000000] text-[#FFFFFF] h-10 text-2xl">
@@ -80,20 +101,22 @@ export default function Folder({params}:any){
                 </div>
             </div>
             <Modal isOpen={showFileModal} >
-            <div className="h-screen flex items-center justify-center ">
-                    <div className="border rounded font-SFmono text-[#FFFFFF] bg-[#1E1E1E] bg-opacity-80">
-                        <div className="m-50 text-[#000000]">
-                            <input type="text" placeholder="name" className="py-3 px-10 rounded"></input>
-                        </div>
-                        <div className="mb-10 ml-50 text-[#000000]">
-                            <input type="text" placeholder="url" className="py-3 px-10 rounded"></input>
-                        </div>
-                        <div className="flex justify-between">
-                        <div className="bg-[#FFFFFF] py-3 px-5 m-50 rounded text-[#000000] bg-[#F0C9C9] cursor-pointer" onClick={()=>{setShowFileModal(false)}}>Cancel</div>
-                        <div className="bg-[#FFFFFF] py-3 px-5 m-50 rounded text-[#000000] bg-[#0084FF] cursor-pointer">Done</div>
+                <form onSubmit={addFile}>
+                    <div className="h-screen flex items-center justify-center ">
+                        <div className="border rounded font-SFmono text-[#FFFFFF] bg-[#1E1E1E] bg-opacity-80">
+                            <div className="m-50 text-[#000000]">
+                                <input type="text" placeholder="name" className="py-3 px-10 rounded" required></input>
+                            </div>
+                            <div className="mb-10 ml-50 text-[#000000]">
+                                <input type="text" placeholder="url" className="py-3 px-10 rounded" required></input>
+                            </div>
+                            <div className="flex justify-between">
+                            <div className="bg-[#FFFFFF] py-3 px-5 m-50 rounded text-[#000000] bg-[#F0C9C9] cursor-pointer" onClick={()=>{setShowFileModal(false)}}>Cancel</div>
+                            <div className="bg-[#FFFFFF] py-3 px-5 m-50 rounded text-[#000000] bg-[#0084FF] cursor-pointer"><button type="submit">Done</button></div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </Modal>
         </main>
     );
