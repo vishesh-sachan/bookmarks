@@ -58,3 +58,33 @@ export async function POST(req : Request){
         }
     }
 }
+
+export async function DELETE(req:Request){
+    const session = await getServerSession(authOptions);
+
+    if(!session){
+        return NextResponse.json({msg:"access denied"},{status:403})
+    }else{
+        const url = new URL(req.url);
+        const id = url.searchParams.get("id");
+        // console.log("delete fun called")
+    
+        if (!id) {
+            return NextResponse.json({ error: "Missing userId" }, { status: 400 });
+        }
+    
+        try{
+            // console.log("database called")
+            await BookMark.deleteOne({
+                _id:id
+            })
+            // console.log("database call succsss")
+    
+            return NextResponse.json({msg:"entry deleted"} , {status: 200})
+    
+        }catch{
+            return NextResponse.json({ error: "Internal DataBase Error & unable to delte Entry" }, { status: 500 });
+        }
+    }
+    
+}

@@ -86,6 +86,12 @@ export default function Root() {
         }
     }
 
+    async function deleteFile(id:string){
+        await axios.delete(`/api/bookmarks?id=${id}`)
+        const val= Math.random()
+        setUpdatedFiles(val)
+    }
+
 
     if(session.status !== "authenticated" && session.status !== "loading"){ //ignore type error
         router.push('/api/auth/signin') // change it to your own signin page 
@@ -135,13 +141,19 @@ export default function Root() {
                     {files.map((file) => {
                         if(file.folder == 'Root')
                         return(
-                        <Link key={file._id} href={file.url} target="_blank">
-                            <div className="bg-[#1A1A1A] rounded cursor-pointer">
-                                <div className="m-6 p-4">
-                                    {file.name}
+                            <div key={file._id} className="bg-[#1A1A1A] rounded ">
+                                <div className="flex justify-between">
+                                    <Link  href={file.url} target="_blank">
+                                        <div className="m-6 p-4 cursor-pointer">
+                                            {file.name}
+                                        </div>
+                                    </Link>
+                                    <div className="m-6 p-4 cursor-pointer" onClick={()=>(deleteFile(file._id))}>
+                                        X
+                                    </div>
                                 </div>
                             </div>
-                        </Link>)
+                        )
                        
                     })}
                 </div>

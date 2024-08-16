@@ -50,6 +50,12 @@ export default function Folder({params}:any){
             console.log('error while getting files',error)
         }
     }
+
+    async function deleteFile(id:string){
+        await axios.delete(`/api/bookmarks?id=${id}`)
+        const val= Math.random()
+        setUpdatedFiles(val)
+    }
     
     if(session.status !== "authenticated" && session.status !== "loading"){
         router.push('/api/auth/signin') // change it to your own signin page 
@@ -87,16 +93,21 @@ export default function Folder({params}:any){
                 </div>
                 <div className="grid grid-cols-5 gap-4 p-4">
                     {files.map((file) => {
-                        if(params.folder == file.folder)
+                        if(file.folder == params.folder)
                         return(
-                        <Link key={file._id} href={file.url} target="_blank">
-                            <div className="bg-[#1A1A1A] rounded cursor-pointer">
-                                <div className="m-6 p-4">
-                                    {file.name}
+                            <div key={file._id} className="bg-[#1A1A1A] rounded ">
+                                <div className="flex justify-between">
+                                    <Link  href={file.url} target="_blank">
+                                        <div className="m-6 p-4 cursor-pointer">
+                                            {file.name}
+                                        </div>
+                                    </Link>
+                                    <div className="m-6 p-4 cursor-pointer" onClick={()=>(deleteFile(file._id))}>
+                                        X
+                                    </div>
                                 </div>
                             </div>
-                        </Link>)
-                       
+                        )
                     })}
                 </div>
             </div>
