@@ -1,5 +1,6 @@
 import { User } from '@/utils/db';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import bcrypt from "bcryptjs"
 
 
 export const authOptions = {
@@ -11,22 +12,21 @@ export const authOptions = {
                 password:{lable: 'password' , type:'password',palceholder:'password'}
             },
             async authorize(credentials :any){
-                console.log(credentials)
+                // console.log(credentials)
 
                 const user = await User.findOne({
                     username:credentials.username
                 })
 
-                if(!user){
-                    return null;
-                }else{
+                if(user && user.password && (await bcrypt.compare(credentials.password, user.password))){
+
                     return{
                         id:user._id.toString(),
                         name:user.username
                     };
-
                 }
-                
+                return null;
+                    
             },
         })
     ],
