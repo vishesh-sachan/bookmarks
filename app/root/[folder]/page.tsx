@@ -60,6 +60,9 @@ export default function Folder({params}:any){
     if(session.status !== "authenticated" && session.status !== "loading"){
         router.push('/api/auth/signin') // change it to your own signin page 
     }
+
+    const decodedFolderName = decodeURI(params.folder)
+
     return (
         <main>
             <div className="flex justify-between font-SFmono bg-[#000000] text-[#FFFFFF] h-10 text-2xl">
@@ -70,7 +73,7 @@ export default function Folder({params}:any){
                         </div>
                     </Link>
                     <div className="ml-20">
-                        {params.folder}
+                        {decodedFolderName}
                     </div>
                 </div>
                 <Link href={'/settings'}>
