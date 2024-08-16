@@ -18,7 +18,8 @@ export default function Home() {
       <div className="flex justify-center font-SFmono text-lg text-[#999999] mt-230">Why Need It? Because Arc Browser Does't Have It!</div>
       <div className="flex justify-center gap-20 mt-50">
       <Link href={'/signup'}><div className="bg-[#FFFFFF] flex justify-center px-12 py-2 rounded">SignUp</div></Link>
-      <Link href={'/signin'}><div className="bg-[#FFFFFF] flex justify-center px-12 py-2 rounded">SignIn</div></Link>
+      <Link href={'/api/auth/signin'}><div className="bg-[#FFFFFF] flex justify-center px-12 py-2 rounded">SignIn</div></Link>
+      {/* change the route back to signin page */}
       </div>
     </main>
   );

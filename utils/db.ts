@@ -15,7 +15,7 @@ if(!mongoose.connections[0].readyState){
 const UserSchema = new mongoose.Schema({
     username: {type:String, unique:true, required:true},
     password: {type:String, required:true},
-    folders: {type:[String]}
+    folders: {type:[String], default:[]}
 })
 
 const bookMarkSchema = new mongoose.Schema({
