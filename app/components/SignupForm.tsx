@@ -51,10 +51,10 @@ export default function SignupForm(){
 
     return <form onSubmit={handleSubmit}>
     <div className="mb-50 ml-50 mr-50 text-[#000000]">
-        <input type="text" placeholder="username" className="py-3 px-10 rounded" required></input>
+        <input type="text" placeholder="username" className="py-3 px-10 rounded" required maxLength={21}></input>
     </div>
     <div className="mb-10 ml-50 text-[#000000]">
-        <input type="text" placeholder="password" className="py-3 px-10 rounded" required></input>
+        <input type="password" placeholder="password" className="py-3 px-10 rounded" required maxLength={10}></input>
     </div>
     <p className="text-[#FF0000] mb-10 ml-50">{error && error}</p>
     <div className="flex justify-end">

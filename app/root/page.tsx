@@ -163,7 +163,7 @@ export default function Root() {
                     <div className="h-screen flex items-center justify-center ">
                         <div className="border rounded font-SFmono text-[#FFFFFF] bg-[#1E1E1E] bg-opacity-80">
                             <div className="m-50 text-[#000000]">
-                                <input type="text" placeholder="name" className="py-3 px-10 rounded" required></input>
+                                <input type="text" placeholder="name" className="py-3 px-10 rounded" required maxLength={20}></input>
                             </div>
                             
                             <div className="flex justify-between">
@@ -183,7 +183,7 @@ export default function Root() {
                 <div className="h-screen flex items-center justify-center ">
                         <div className="border rounded font-SFmono text-[#FFFFFF] bg-[#1E1E1E] bg-opacity-80">
                             <div className="m-50 text-[#000000]">
-                                <input type="text" placeholder="name" className="py-3 px-10 rounded" required></input>
+                                <input type="text" placeholder="name" className="py-3 px-10 rounded" required maxLength={20}></input>
                             </div>
                             <div className="mb-10 ml-50 text-[#000000]">
                                 <input type="text" placeholder="url" className="py-3 px-10 rounded" required></input>
