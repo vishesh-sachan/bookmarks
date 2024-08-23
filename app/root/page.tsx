@@ -120,7 +120,7 @@ export default function Root() {
                 <div className="cursor-pointer ml-20" onClick={()=>{setShowFolderModal(true)}}>
                     Folders +
                 </div>
-                <div className="grid grid-cols-5 gap-4 p-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 p-4">
                     {folders.map((folder, index) => (
                         <Link key={index} href={`/root/${folder}`}>
                             <div className="bg-[#1A1A1A] rounded cursor-pointer">
@@ -137,7 +137,7 @@ export default function Root() {
                 <div className="cursor-pointer ml-20" onClick={()=>{setShowFileModal(true)}}>
                     Files +
                 </div>
-                <div className="grid grid-cols-5 gap-4 p-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 p-4">
                     {files.map((file) => {
                         if(file.folder == 'Root')
                         return(

@@ -94,7 +94,7 @@ export default function Folder({params}:any){
                 <div className="cursor-pointer ml-20" onClick={()=>{setShowFileModal(true)}}>
                     Files +
                 </div>
-                <div className="grid grid-cols-5 gap-4 p-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 p-4">
                     {files.map((file) => {
                         if(file.folder == params.folder)
                         return(
